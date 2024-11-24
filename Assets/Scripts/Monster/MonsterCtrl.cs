@@ -205,6 +205,7 @@ public class MonsterCtrl : MonoBehaviour
     }
 
     #endregion [Methods]
+
     #region [Unity Methods]    
 
     void Start()
