@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_boxHp: 10
+  m_coin: {fileID: 824493735906687298, guid: a5ee318b45bfb7d47948d43f7620ab02, type: 3}
 --- !u!208 &763147346597410493
 NavMeshObstacle:
   m_ObjectHideFlags: 0

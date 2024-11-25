@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3550500034014227527}
   - component: {fileID: 440513538453070387}
   - component: {fileID: 5432565598148252634}
+  - component: {fileID: 2624436931373290754}
   - component: {fileID: 3180349086782575475}
   m_Layer: 0
   m_Name: Coin
@@ -119,6 +120,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f8e6e017fa087408fb05201903f1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2624436931373290754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824493735906687298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de963cd1882fb57478b4d25657ac52ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_from: {x: 0, y: 0, z: 0}
+  m_to: {x: 0, y: 0, z: 0}
+  m_duration: 1
 --- !u!65 &3180349086782575475
 BoxCollider:
   m_ObjectHideFlags: 0

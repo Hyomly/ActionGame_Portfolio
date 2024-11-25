@@ -13,8 +13,9 @@ public class MoveTween : MonoBehaviour
     [SerializeField]
     Vector3 m_to;
     [SerializeField]
-    float m_duration = 1f;   
-        
+    float m_duration = 1f;
+    bool m_isItem = false;
+    bool m_isMagnet=false;
 
     IEnumerator CoTweenProcess()
     {
@@ -26,7 +27,9 @@ public class MoveTween : MonoBehaviour
         {
             if(time > 1.0f)
             {
-                transform.position = m_to;   
+                transform.position = m_to;
+                m_isMagnet = true;
+               
                 yield break;
             }
             value = m_curve.Evaluate(time);
@@ -37,14 +40,46 @@ public class MoveTween : MonoBehaviour
             yield return null;
         }
     }
+    IEnumerator CoTweenProcessCoin()
+    {
+        float time = 0f;
+        float value = 0f;
+        Vector3 pos = Vector3.zero;
+        while (true)
+        {
+            if (time > 1.0f)
+            {
+                transform.position = m_to;
+                yield break;
+            }
+            value = m_curve.Evaluate(time);
+            pos = m_from * (1f - value) + m_to * value;
+            var dir = pos - transform.position;
+            transform.Translate(dir);
+            time += Time.deltaTime / m_duration;
+            yield return null;
+        }
+    }
+    void Magnet(Vector3 playerPos)
+    {
 
+    }
     public void Play()
     {
         StopAllCoroutines();
-        StartCoroutine(CoTweenProcess());
+        if(m_isItem)
+        {
+            StartCoroutine(CoTweenProcessCoin());    
+        }
+        else
+        {
+            StartCoroutine(CoTweenProcess());
+        }
+        
     }
-    public void Play(Vector3 from, Vector3 to, float duration)
+    public void Play(Vector3 from, Vector3 to, float duration, bool isItem)
     {
+        m_isItem = isItem;
         m_from = from;
         m_to = to;
         m_duration = duration;

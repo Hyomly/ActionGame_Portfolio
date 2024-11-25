@@ -15,8 +15,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     int m_second;
     int m_stageCoins;
 
-    #endregion [Constants and Fields]
     List<BattleAreaCtrl> m_battleAreas = new List<BattleAreaCtrl>();
+    #endregion [Constants and Fields]
+    
 
 
     #region [Public Mathods]
@@ -26,10 +27,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         UIManager.Instance.ShowCoins(m_stageCoins);
     }
 
-    public void BattleStart()
-    {
-
-    }
+    
 
     #endregion [Public Mathods]
 

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static MonsterCtrl;
+using static UnityEditor.PlayerSettings;
 
 
 public class MonsterCtrl : MonoBehaviour
@@ -77,17 +79,29 @@ public class MonsterCtrl : MonoBehaviour
     #endregion [Animation Event Methos]
 
     #region [Public Methods]
-    public void InitMonster(PlayerCtrl player)
+    public void InstancePlayer(PlayerCtrl player)
     {
         m_player = player;
+    }
+    public void InitMonster()
+    {
+        SetState(AIState.Idle);
+        m_monAniCtrl.Play(MonsterAniCtrl.Motion.Idle);
+        m_status.hp = m_status.hpMax;
+        m_hud.HpBarInit(m_status.hpMax);
+        
     }   
+    public void IsDie(bool isDie)
+    {
+        m_isDie=isDie;
+    }
     public void SetDamage(float damage)
     {
         if (!m_isDie)
         {
             // Hp Down
             m_status.hp -= Mathf.RoundToInt(damage);
-            m_hud.IsDamage(true, m_status.hp, m_status.hpMax);
+            m_hud.IsDamage(true, m_status.hp);
             SetState(AIState.Damage);
             m_monAniCtrl.Play(MonsterAniCtrl.Motion.Damage);
 
@@ -97,7 +111,7 @@ public class MonsterCtrl : MonoBehaviour
             dir.y = 0f;
             Vector3 to = from + dir.normalized * 0.2f;//맞은 거리
             float duration = 0.2f;
-            m_moveTween.Play(from, to, duration);
+            m_moveTween.Play(from, to, duration, false);
 
         }
         // 몬스터 죽음
@@ -113,8 +127,12 @@ public class MonsterCtrl : MonoBehaviour
     void SetDie()
     {
         m_isDie = true;
+        Vector3 deathPos = transform.position;
+        deathPos.y += 0.3f;
+        ItemManager.Instance.CreateCoin(deathPos);
         MonsterManager.Instance.RemoveMonster(this);
-        m_status.hp = m_status.hpMax;       
+        m_hud.HideBar();
+        
     }
 
     bool CheckArea(Vector3 targetPos, float dist)
@@ -177,14 +195,7 @@ public class MonsterCtrl : MonoBehaviour
         SetIdleDuration(duration);
         m_monAniCtrl.Play(MonsterAniCtrl.Motion.Idle);
     }
-    void DropItem()
-    {
-        Vector3 randPos = Random.insideUnitCircle * 0.5f;
-        randPos.y = 0;
-        var dir = randPos - transform.position;
-        var to = dir.normalized * 0.5f; 
-        m_moveTween.Play(transform.position, to, 0.2f);
-    }
+   
     IEnumerator CoChaseToTarget(Transform target, int frame)
     {
         while (m_state == AIState.Chase)
@@ -215,7 +226,7 @@ public class MonsterCtrl : MonoBehaviour
         m_moveTween = GetComponent<MoveTween>();
         m_attackArea = GetComponentInChildren<Mon_AttackArea_UnitFind>();
         m_hud = GetComponent<HUD_Ctrl>();
-        m_hud.HpBarInit(m_status.hpMax);
+        InitMonster();
     }
 
     void Update()

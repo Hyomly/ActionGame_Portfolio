@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class EndArea : MonoBehaviour
 {
@@ -8,14 +9,19 @@ public class EndArea : MonoBehaviour
     GameObject m_bud;
     [SerializeField]
     GameObject m_bloom;
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            print("end");
-            m_bud.SetActive(false);
-            m_bloom.SetActive(true);
+            Invoke("BloomCtrl", 3f);
         }
+    }
+    
+
+    void BloomCtrl()
+    {
+        m_bud.SetActive(false);
+        m_bloom.SetActive(true);
     }
     private void Start()
     {

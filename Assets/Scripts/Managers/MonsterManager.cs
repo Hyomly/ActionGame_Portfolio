@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class MonsterManager : SingletonMonobehaviour<MonsterManager>
 {
     [SerializeField]
     PlayerCtrl m_player;
+    [SerializeField]
+    GameObject m_coin;
     [SerializeField]
     GameObject m_monsterPrefab;
     int m_removeCount = 0;
@@ -21,19 +24,22 @@ public class MonsterManager : SingletonMonobehaviour<MonsterManager>
             var mon = m_slimePool.Get();            
             mon.transform.position = spawnPos[i + 1].transform.position;
             mon.transform.parent.gameObject.SetActive(true);
-            
+            mon.IsDie(false);
         }
     }
     public void RemoveMonster(MonsterCtrl mon)
     {
-        mon.transform.parent.gameObject.SetActive(false);
+        mon.InitMonster();
+        mon.transform.parent.gameObject.SetActive(false);        
+        m_slimePool.Set(mon);
         m_removeCount++;
         if(m_removeCount == m_monsterCount)
         {
             BattleAreaManager.Instance.EndBattle();
+            m_removeCount = 0;
         }
     }
-   
+    
     // Start is called before the first frame update
     protected override void OnStart()
     {
@@ -44,7 +50,7 @@ public class MonsterManager : SingletonMonobehaviour<MonsterManager>
             obj.SetActive(false);
             obj.transform.SetParent(transform);
             var mon = obj.GetComponentInChildren<MonsterCtrl>();
-            mon.InitMonster(m_player);
+            mon.InstancePlayer(m_player);
             return mon;
         });
         

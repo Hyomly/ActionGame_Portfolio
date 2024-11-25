@@ -111,7 +111,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         // Hp Down
         m_status.hp -= Mathf.RoundToInt(damage);        
-        m_hud.IsDamage(true, m_status.hp, m_status.hpMax);
+        m_hud.IsDamage(true, m_status.hp);
         
         m_animCtrl.Play(PlayerAniCtrl.Motion.Damage);
 
@@ -163,10 +163,7 @@ public class PlayerCtrl : MonoBehaviour
     #endregion [Methods]
 
     #region [Unity Methods] 
-    private void Awake()
-    {
-       
-    }
+    
     void Start()
     {
         m_animCtrl = GetComponent<PlayerAniCtrl>();

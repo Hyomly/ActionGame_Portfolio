@@ -19,19 +19,20 @@ public class HUD_Ctrl : MonoBehaviour
 
     bool m_isDamage = false;
     float m_currentHp;
-    float m_maxHp;
-    public void IsDamage(bool isDamage, float currentHp, float maxHp)
+    public void IsDamage(bool isDamage, float currentHp)
     {
         m_isDamage = isDamage;
         m_currentHp = currentHp;
-        m_maxHp = maxHp;    
+        
     }
     public void HpBarInit(float maxHp)
     {
-        m_frontHpBar.maxValue = maxHp;
-        m_backHpBar.maxValue = maxHp;
+        m_isDamage = false ;
+        m_frontHpBar.maxValue = maxHp;        
         m_frontHpBar.value = maxHp;
+        m_backHpBar.maxValue = maxHp;
         m_backHpBar.value = maxHp;
+        m_hpText.text = (maxHp).ToString();
     }
     public void UpdateBar()
     {
@@ -59,7 +60,7 @@ public class HUD_Ctrl : MonoBehaviour
     {
         m_hud.gameObject.SetActive(true);
     }
-    void HideBar()
+    public void HideBar()
     {
         m_hud.gameObject.SetActive(false);
     }

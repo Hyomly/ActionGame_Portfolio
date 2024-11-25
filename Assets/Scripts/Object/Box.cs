@@ -6,6 +6,9 @@ public class Box : MonoBehaviour
 {
     [SerializeField]
     int m_boxHp = 10;
+    [SerializeField]
+    GameObject m_coin;
+    Vector3 m_pos;
 
     public void SetDamage( float damage )
     {
@@ -13,7 +16,9 @@ public class Box : MonoBehaviour
         if( m_boxHp <= 0 )
         {
             gameObject.SetActive( false );
+            ItemManager.Instance.CreateCoin(transform.position);
         }
     }
+   
     
 }
