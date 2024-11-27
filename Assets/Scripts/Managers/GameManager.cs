@@ -6,8 +6,7 @@ using UnityEngine;
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
     #region [Constants and Fields]
-    [SerializeField]
-    PlayerCtrl m_player;
+   
     [SerializeField]
     float m_time = 30f;
     float m_curTime;

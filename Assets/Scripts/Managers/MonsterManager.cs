@@ -6,9 +6,7 @@ using static UnityEditor.PlayerSettings;
 public class MonsterManager : SingletonMonobehaviour<MonsterManager>
 {
     [SerializeField]
-    PlayerCtrl m_player;
-    [SerializeField]
-    GameObject m_coin;
+    PlayerCtrl m_player;    
     [SerializeField]
     GameObject m_monsterPrefab;
     int m_removeCount = 0;

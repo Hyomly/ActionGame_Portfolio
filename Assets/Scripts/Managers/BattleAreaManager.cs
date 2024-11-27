@@ -11,6 +11,12 @@ public class BattleAreaManager : SingletonMonobehaviour<BattleAreaManager>
     List<BattleAreaCtrl> m_battleArea = new List<BattleAreaCtrl>();
     [SerializeField]
     List<Transform> m_spawnArea = new List<Transform>();
+
+    public void AddList(BattleAreaCtrl battleArea)
+    {
+        m_battleArea.Add(battleArea);
+    }
+
     public void CurrentArea()
     {
         for (int i = 0; i < m_battleArea.Count; i++)
