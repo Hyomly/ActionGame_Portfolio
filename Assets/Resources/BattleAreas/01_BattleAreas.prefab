@@ -709,7 +709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8741403563981690044}
   m_Layer: 0
-  m_Name: Stage1_BattleAreas
+  m_Name: 01_BattleAreas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

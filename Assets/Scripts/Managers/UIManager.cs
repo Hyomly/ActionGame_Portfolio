@@ -22,6 +22,10 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     {
         m_coinCountText.text = coinCount.ToString();
     }
+    protected override void OnStart()
+    {
+        TableLoader.Instance.LoadTable("Mission");
+    }
     #endregion [Public Mathods]
    
 

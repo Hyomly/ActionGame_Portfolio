@@ -812,7 +812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4701462681689499731}
   m_Layer: 0
-  m_Name: Stage2_BattleAreas
+  m_Name: 02_BattleAreas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,8 +8,6 @@ public enum SceneState
 {
     None = -1,
     Title,
-    Lobby,
-    Stage,
     Game
 }
 public class LoadScene : SingletonDontDestroy<LoadScene>
@@ -25,4 +23,4 @@ public class LoadScene : SingletonDontDestroy<LoadScene>
     }
     
 
-}
+}  

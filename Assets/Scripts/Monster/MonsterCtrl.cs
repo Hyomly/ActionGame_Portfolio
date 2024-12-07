@@ -4,8 +4,7 @@ using System.Data.SqlTypes;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static MonsterCtrl;
-using static UnityEditor.PlayerSettings;
+
 
 
 public class MonsterCtrl : MonoBehaviour

@@ -15,7 +15,6 @@ public class MoveTween : MonoBehaviour
     [SerializeField]
     float m_duration = 1f;
     bool m_isItem = false;
-    bool m_isMagnet=false;
 
     IEnumerator CoTweenProcess()
     {
@@ -28,7 +27,6 @@ public class MoveTween : MonoBehaviour
             if(time > 1.0f)
             {
                 transform.position = m_to;
-                m_isMagnet = true;
                
                 yield break;
             }
