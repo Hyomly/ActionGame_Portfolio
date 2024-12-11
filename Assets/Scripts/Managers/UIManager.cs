@@ -11,8 +11,11 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     TMP_Text m_timerText;
     [SerializeField]
     TMP_Text m_coinCountText;
+    [SerializeField]
+    TMP_Text[] m_missions;
 
     #endregion [Constants and Fields]
+   
     #region [Public Mathods]
     public void ShowTimer( int minute, int second )
     {
@@ -22,11 +25,19 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     {
         m_coinCountText.text = coinCount.ToString();
     }
-    protected override void OnStart()
+   
+    public void ShowMission(int stage)
     {
-        TableLoader.Instance.LoadTable("Mission");
+        var missionData = MissionTable.Instance.GetMissionData(stage);
+        for (int i = 0; i < missionData.Mission.Length; i++)
+        {
+            m_missions[i].text = missionData.Mission[i].ToString();
+        }
     }
     #endregion [Public Mathods]
-   
-
+    protected override void OnStart()
+    {
+        
+        ShowMission(1);
+    }
 }

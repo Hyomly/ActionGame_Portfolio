@@ -13,6 +13,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     int m_minute;
     int m_second;
     int m_stageCoins;
+    
 
     List<BattleAreaCtrl> m_battleAreas = new List<BattleAreaCtrl>();
     #endregion [Constants and Fields]
@@ -25,8 +26,11 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         m_stageCoins++;
         UIManager.Instance.ShowCoins(m_stageCoins);
     }
-
-    
+    public void StartTimer()
+    {
+        StartCoroutine(CoTimer());
+    }
+   
 
     #endregion [Public Mathods]
 
@@ -50,12 +54,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             }
         }
     }
+
+
     #endregion [Mathods]
     // Start is called before the first frame update
     protected override void OnStart()
     {
         m_curTime = m_time;
-        StartCoroutine(CoTimer());
+       
     }
 
 }

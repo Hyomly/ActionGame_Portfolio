@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TableLoader : Singleton<TableLoader>
@@ -60,7 +59,14 @@ public class TableLoader : Singleton<TableLoader>
             {
                 for (int j = 0; j < columnCount; j++)
                 {
-                    keyList.Add(tableData[offset]);
+                    if (j == columnCount - 1)
+                    {
+                        keyList.Add(tableData[offset].Replace("\n", ""));
+                    }
+                    else
+                    {
+                        keyList.Add(tableData[offset]);
+                    }
                     offset++;
                 }
             }
@@ -69,7 +75,14 @@ public class TableLoader : Singleton<TableLoader>
                 Dictionary<string, string> rowData = new Dictionary<string, string>();
                 for(int j = 0; j < columnCount; j++)
                 {
-                    rowData.Add(keyList[j], tableData[offset]);
+                    if (j == columnCount - 1)
+                    {
+                        rowData.Add(keyList[j], tableData[offset].Replace("\n", ""));
+                    }
+                    else
+                    {
+                        rowData.Add(keyList[j], tableData[offset]);
+                    }
                     offset++;
                 }
                 m_table.Add(rowData);

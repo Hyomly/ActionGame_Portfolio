@@ -21,6 +21,5 @@ public class LoadScene : SingletonDontDestroy<LoadScene>
         m_loadState = state;
         m_loadingState = SceneManager.LoadSceneAsync((int)state);
     }
-    
-
 }  
+
