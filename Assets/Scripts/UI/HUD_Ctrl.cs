@@ -77,10 +77,12 @@ public class HUD_Ctrl : MonoBehaviour
         {
             HideBar();
         }
+   
     }
     private void Update()
     {
         m_hud.transform.position = m_target.position;
+        m_hud.transform.rotation = Camera.main.transform.rotation;
         if(m_isDamage)
         {
             UpdateBar();

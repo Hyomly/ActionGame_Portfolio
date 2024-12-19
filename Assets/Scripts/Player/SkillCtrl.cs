@@ -5,14 +5,14 @@ using UnityEngine;
 public class SkillCtrl : MonoBehaviour
 {
     [SerializeField]
-    List<PlayerAniCtrl.Motion> m_comboList;
+    List<Motion> m_comboList;
     Queue<KeyCode> m_keyBuffer = new Queue<KeyCode>();
 
     int m_comboIndex;
     public int CommandCount {  get { return m_keyBuffer.Count;} }
     public int ComboCount {  get { return m_comboList.Count; } }
 
-    public PlayerAniCtrl.Motion GetCombo()
+    public Motion GetCombo()
     {
         m_comboIndex++;
         if(m_comboIndex >= m_comboList.Count)

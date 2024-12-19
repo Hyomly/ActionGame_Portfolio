@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Motion
+{
+    Idle,
+    Walk,
+    Attack1,
+    Attack2,
+    Attack3,
+    Damage,
+    Desh,
+    Skill1,
+    Skill2,
+    Death,
+    Max
+}
+
 public class PlayerAniCtrl : AnimationCtrl
 {
     #region [Constants and Fields]
-    public enum Motion
-    {
-        Idle,
-        Walk,
-        Attack1,
-        Attack2,
-        Attack3,
-        Damage,
-        Desh,
-        Skill1,
-        Skill2,
-        Death,
-        Max
-    }
+ 
     [SerializeField]
     Motion m_curMotion;
 

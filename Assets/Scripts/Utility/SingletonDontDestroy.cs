@@ -23,7 +23,5 @@ public class SingletonDontDestroy<T>: MonoBehaviour where T : SingletonDontDestr
         {
             OnStart();
         }
-    }
-
-   
+    }   
 }

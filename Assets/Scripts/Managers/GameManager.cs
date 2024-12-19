@@ -8,7 +8,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     #region [Constants and Fields]
    
     [SerializeField]
-    float m_time = 30f;
+    float m_time = 90f;
     float m_curTime;
     int m_minute;
     int m_second;
@@ -30,7 +30,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         StartCoroutine(CoTimer());
     }
-   
+    public void SetTime()
+    {
+        m_curTime = m_time;
+        m_minute = (int)m_curTime / 60;
+        m_second = (int)m_curTime % 60;
+        UIManager.Instance.ShowTimer(m_minute, m_second);
+    }
 
     #endregion [Public Mathods]
 
@@ -60,8 +66,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     // Start is called before the first frame update
     protected override void OnStart()
     {
-        m_curTime = m_time;
-       
+        SetTime();
     }
 
 }

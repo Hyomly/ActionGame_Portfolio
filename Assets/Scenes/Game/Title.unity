@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2687ab0b685064143aedb4e2c03ce7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_loadState: -1
 --- !u!4 &706737241
 Transform:
   m_ObjectHideFlags: 0
@@ -320,6 +321,7 @@ GameObject:
   - component: {fileID: 759296553}
   - component: {fileID: 759296555}
   - component: {fileID: 759296554}
+  - component: {fileID: 759296556}
   m_Layer: 5
   m_Name: Touch_Text (TMP)
   m_TagString: Untagged
@@ -393,8 +395,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -443,6 +445,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759296552}
   m_CullTransparentMesh: 1
+--- !u!114 &759296556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759296552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548415a37a94f95488117b01ffdf91a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rate: 0.5
 --- !u!1 &1070507746
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,17 +19,20 @@ public class PlayerCtrl : MonoBehaviour
     [Space(10f)]
     [SerializeField, Header("[ 주인공 능력치 ]")]
     Status m_status;
-    
-    //[SerializeField]
+  
     bool m_isCombo = false;
+    bool m_isUseSkill1 = true;
+    bool m_isUseSkill2 = true;
+    bool m_isUseDesh = true;
     int hash_Move;
     float m_speed = 4f;
     Vector3 m_dir;
+
    
     #endregion [Constants and Fields]
 
     #region [Public  Properties]
-    PlayerAniCtrl.Motion GetMotion { get { return m_animCtrl.GetMotion; } }  //current Motion
+    Motion GetMotion { get { return m_animCtrl.GetMotion; } }  //current Motion
 
     #endregion [Public Properties]
 
@@ -37,7 +40,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void AnimEvent_AnimFinished()
     {
-        m_animCtrl.Play(PlayerAniCtrl.Motion.Idle);
+        m_animCtrl.Play(Motion.Idle);
     }
     void AnimEvent_Attack()
     {
@@ -96,7 +99,7 @@ public class PlayerCtrl : MonoBehaviour
         else
         {
             m_skillCtrl.ResetCombo();
-            m_animCtrl.Play(PlayerAniCtrl.Motion.Idle);            
+            m_animCtrl.Play(Motion.Idle);            
         }
        
     }
@@ -113,7 +116,7 @@ public class PlayerCtrl : MonoBehaviour
         m_status.hp -= Mathf.RoundToInt(damage);        
         m_hud.IsDamage(true, m_status.hp);
         
-        m_animCtrl.Play(PlayerAniCtrl.Motion.Damage);
+        m_animCtrl.Play(Motion.Damage);
 
         // GameOver
         if (m_status.hp <= 0)
@@ -123,9 +126,9 @@ public class PlayerCtrl : MonoBehaviour
     }
     public void SetAttack()
     {
-        if (GetMotion == PlayerAniCtrl.Motion.Idle || GetMotion == PlayerAniCtrl.Motion.Walk)
+        if (GetMotion == Motion.Idle || GetMotion == Motion.Walk)
         {
-            m_animCtrl.Play(PlayerAniCtrl.Motion.Attack1);
+            m_animCtrl.Play(Motion.Attack1);
         }
         else
         {
@@ -134,15 +137,36 @@ public class PlayerCtrl : MonoBehaviour
     }
     public void SetDesh()
     {
-        m_animCtrl.Play(PlayerAniCtrl.Motion.Desh);        
+        if (m_isUseDesh)
+        {
+            UIManager.Instance.InitSlider(Motion.Desh, 3f);
+            m_animCtrl.Play(Motion.Desh);
+            m_isUseDesh = false;
+            StartCoroutine(CoDeshCool(Motion.Desh, 3f));            
+        }
+               
     }
     public void SetSkill1()
     {
-        m_animCtrl.Play(PlayerAniCtrl.Motion.Skill1);
+        if(m_isUseSkill1)
+        {
+            UIManager.Instance.InitSlider(Motion.Skill1, 5f);
+            m_animCtrl.Play(Motion.Skill1, false);
+            m_isUseSkill1 = false;
+            StartCoroutine(CoSkill1Cool(Motion.Skill1, 5f));
+            
+        }       
     }
     public void SetSkill2()
     {
-        m_animCtrl.Play(PlayerAniCtrl.Motion.Skill2);
+        if (m_isUseSkill2)
+        {
+            UIManager.Instance.InitSlider(Motion.Skill2, 5f);
+            m_animCtrl.Play(Motion.Skill2, false);
+            m_isUseSkill2 = false;
+            StartCoroutine(CoSkill2Cool(Motion.Skill2, 5f));
+            
+        }
     }
     #endregion [Public Methods]
 
@@ -158,12 +182,67 @@ public class PlayerCtrl : MonoBehaviour
         if(padDir.y > 0f)   {  dir += Vector3.forward * padDir.y;  }
         return dir;  
     }
+    IEnumerator CoDeshCool(Motion skill, float coolTime)
+    {
+        if (skill == Motion.Desh)
+        {
+            float curTime = coolTime;
+            while (curTime > 0f)
+            {
+                UIManager.Instance.ShowCoolTime(skill, curTime);
+                curTime -= Time.deltaTime;
+                
+               
+                yield return null;
+            }
+            if (curTime <= 0f)
+            {
+                m_isUseDesh = true;
+            }
 
+        }
+    }
+    IEnumerator CoSkill1Cool(Motion skill, float coolTime)
+    {
+        if (skill == Motion.Skill1)
+        {
+            float curTime = coolTime;
+            while (curTime > 0f)
+            {
+                UIManager.Instance.ShowCoolTime(skill, curTime);
+                curTime -= Time.deltaTime;                
+                yield return null;
+            }
+            if (curTime <= 0f)
+            {
+                m_isUseSkill1 = true;
+            }            
+        }
+    }
+    IEnumerator CoSkill2Cool(Motion skill, float coolTime)
+    {
+        if (skill == Motion.Skill2)
+        {
+            float curTime = coolTime;
+            while (curTime > 0f)
+            {
+                UIManager.Instance.ShowCoolTime(skill, curTime);
+                curTime -= Time.deltaTime;
+                
+                yield return null;
+            }
+            if (curTime <= 0f)
+            {
+                m_isUseSkill2 = true;
+            }
+        }
 
+    }
+  
     #endregion [Methods]
 
     #region [Unity Methods] 
-    
+
     void Start()
     {
         m_animCtrl = GetComponent<PlayerAniCtrl>();
