@@ -28,8 +28,7 @@ public class MissionCtrl : MonoBehaviour
                 if(m_count >= m_missions.Length)
                 {                    
                     StartCoroutine(CoShowMission(false));
-                }
-               
+                }               
             }
         }
         else
@@ -41,11 +40,9 @@ public class MissionCtrl : MonoBehaviour
                 {
                     m_missions[i].SetActive(false);
                     m_count--;
-                }
-               
+                }               
             }
-        }
-       
+        }       
     }
     private void Awake()
     {

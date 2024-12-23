@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     [Space(10f)]
     [SerializeField, Header("[ 주인공 능력치 ]")]
     Status m_status;
+   
   
     bool m_isCombo = false;
     bool m_isUseSkill1 = true;
@@ -115,13 +116,18 @@ public class PlayerCtrl : MonoBehaviour
         // Hp Down
         m_status.hp -= Mathf.RoundToInt(damage);        
         m_hud.IsDamage(true, m_status.hp);
+        if( m_status.hp != m_status.hpMax )
+        {
+            GameManager.Instance.IsDamaged();
+        }
+        
         
         m_animCtrl.Play(Motion.Damage);
 
         // GameOver
         if (m_status.hp <= 0)
         {
-            //GameOver();
+            GameManager.Instance.GameOver();
         }
     }
     public void SetAttack()

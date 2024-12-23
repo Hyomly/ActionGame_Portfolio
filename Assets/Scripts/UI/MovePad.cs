@@ -29,11 +29,15 @@ public class MovePad : SingletonMonobehaviour<MovePad>, IBeginDragHandler, IDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         m_firstTouch = eventData.position;
+        if(m_firstTouch == null)
+        {
+            m_firstTouch = Vector2.zero;
+        }
         var inputDir = m_firstTouch - m_rectTrans.anchoredPosition;
         
         StickCtrl(inputDir);
     }
-
+     
     //드래그 중
     public void OnDrag(PointerEventData eventData)
     {

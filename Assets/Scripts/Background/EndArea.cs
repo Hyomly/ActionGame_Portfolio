@@ -13,7 +13,7 @@ public class EndArea : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Invoke("BloomCtrl", 3f);
+            Invoke("BloomCtrl", 2f);
         }
     }
     
@@ -22,6 +22,7 @@ public class EndArea : MonoBehaviour
     {
         m_bud.SetActive(false);
         m_bloom.SetActive(true);
+        GameManager.Instance.CompletedGame();
     }
     private void Start()
     {
