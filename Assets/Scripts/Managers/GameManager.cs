@@ -14,6 +14,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     int m_second;
     int m_stageCoins;
     int m_curStage;
+    bool m_isDamage = false;
     bool m_mission1 = false;
     bool m_mission2 = false;
     bool m_mission3 = false;
@@ -52,13 +53,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     }
     public void IsDamaged()
     {
-        CheckDamage(true);
+        m_isDamage= true;
     }   
     public void CompletedGame()
     {
         StopAllCoroutines();
         IsOver(true);
-        CheckDamage(false);
+        CheckDamage(m_isDamage);
         CheckPlayTime(m_curTime);
         UIManager.Instance.ShowClearMission(m_mission1,m_mission2,m_mission3);
         UIManager.Instance.ShowCompletePanel();
