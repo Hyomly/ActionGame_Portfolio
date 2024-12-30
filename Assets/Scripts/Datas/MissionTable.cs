@@ -35,7 +35,7 @@ public class MissionTable : SingletonMonobehaviour<MissionTable>
     public Data GetMissionData(int stage)
     {
         return m_tableData[stage];
-    }D
+    }
     
    protected override void OnStart()
     {
